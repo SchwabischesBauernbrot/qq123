@@ -227,8 +227,11 @@ app.post("/getchat", jsonParser, function(request, response){
 });
 app.post("/getstatus", jsonParser, function(request, response_getstatus = response){
     if(!request.body) return response_getstatus.sendStatus(400);
-    
-    api_server = request.body.api_server;
+    if(is_colab){
+        api_server = '127.0.0.1:80808';
+    }else{
+        api_server = request.body.api_server;
+    }
     if(api_server.indexOf('localhost') != -1){
         api_server = api_server.replace('localhost','127.0.0.1');
     }
@@ -991,6 +994,8 @@ app.listen(server_port, function() {
     }
     if(!is_colab){
         console.log('TavernAI started: http://127.0.0.1:'+server_port);
+    }else{
+        
     }
     if (fs.existsSync('public/characters/update.txt') && !is_colab) {
         convertStage1();
