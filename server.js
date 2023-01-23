@@ -992,7 +992,7 @@ app.listen(server_port, function() {
             is_colab = true;
         }
     }
-    if(!is_colab){
+    if(true){
         console.log('TavernAI started: http://127.0.0.1:'+server_port);
     }else{
         
